@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeMarket — Discover Vibe-Coded Apps &amp; Websites</title>
+<meta name="description" content="The #1 marketplace to discover, share and promote vibe-coded web apps and websites. List for free. Get featured for $5.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+<canvas id="bgc"></canvas>
+
+<!-- TOAST -->
+<div id="toast"><div class="t-i"></div><div><div class="t-t"></div><div class="t-s"></div></div></div>
+
+<!-- ══════════════════════════════════════════
+     DETAIL MODAL
+══════════════════════════════════════════ -->
+<div id="ov" onclick="closeOv(event)">
+  <div class="dm">
+    <div class="dm-hd">
+      <button class="dm-close" onclick="closeDm()">✕</button>
+      <div class="dm-top">
+        <div class="dm-ico" id="d-ico"></div>
+        <div>
+          <div id="d-tbadge" style="margin-bottom:6px;display:inline-block;"></div>
+          <div class="dm-name" id="d-name"></div>
+        </div>
+      </div>
+      <div class="dm-tagline" id="d-tagline"></div>
+      <div class="dm-tags" id="d-tags"></div>
+    </div>
+
+    <div class="dm-body">
+
+      <div class="dm-sec">
+        <div class="dm-st">About This Project</div>
+        <div class="dm-txt" id="d-desc"></div>
+      </div>
+
+      <div class="dm-sec" id="d-info-sec">
+        <div class="dm-st">Project Info</div>
+        <div class="info-grid" id="d-info"></div>
+      </div>
+
+      <div class="dm-sec" id="d-tech-sec">
+        <div class="dm-st">Tech Stack</div>
+        <div class="tech-tags" id="d-tech"></div>
+      </div>
+
+      <div class="dm-sec" id="d-feat-sec">
+        <div class="dm-st">Key Features</div>
+        <div id="d-feats" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div>
+      </div>
+
+      <div class="dm-sec">
+        <div class="dm-st">Contact Creator</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.75;">
+          Reach out to the creator for questions, demos, or collaboration.
+        </p>
+        <div class="contact-box">
+          <div style="font-size:24px;">💬</div>
+          <div>
+            <div class="cb-lbl">Creator Contact</div>
+            <div class="cb-val" id="d-contact">—</div>
+          </div>
+          <button class="cb-cp" onclick="cpContact()">COPY</button>
+        </div>
+      </div>
+
+      <a id="d-visit-btn" href="#" target="_blank" rel="noopener" class="visit-btn">
+        ↗ Visit Live Project
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav id="nav">
+  <a class="logo" href="#">Vibe<span>Market</span></a>
+  <div class="nav-r">
+    <a href="#listings">Browse</a>
+    <a href="#promote">Get Featured</a>
+    <a href="#list" class="nav-cta">Submit Project</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="h-badge">Discover the best vibe-coded apps &amp; websites</div>
+    <h1 class="h-title">
+      <span class="l1">VIBE</span>
+      <span class="l2">MARKET</span>
+    </h1>
+    <p class="h-sub">
+      The #1 place to <b>discover, share &amp; promote</b> vibe-coded web apps and websites.<br>
+      List for free. Get featured for <b>$5</b>.
+    </p>
+    <div class="h-actions">
+      <a href="#listings" class="btn-p">Browse Projects</a>
+      <a href="#list"     class="btn-g">Submit Your Project →</a>
+    </div>
+    <div class="h-stats">
+      <div><div class="sn" id="st-total">—</div><div class="sl">Projects</div></div>
+      <div><div class="sn" id="st-creators">—</div><div class="sl">Creators</div></div>
+      <div><div class="sn" id="st-feat">—</div><div class="sl">Featured</div></div>
+    </div>
+    <div class="scroll-ind"><div class="s-line"></div><div class="s-txt">SCROLL</div></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="mq">
+    <div class="mq-i">
+      <span class="mq-t">Vibe-Coded Apps</span>
+      <span class="mq-t">Web Builds</span>
+      <span class="mq-t">SaaS Projects</span>
+      <span class="mq-t">Landing Pages</span>
+      <span class="mq-t">AI Tools</span>
+      <span class="mq-t">Side Projects</span>
+      <span class="mq-t">Get Featured for $5</span>
+      <span class="mq-t">List for Free</span>
+      <span class="mq-t">Vibe-Coded Apps</span>
+      <span class="mq-t">Web Builds</span>
+      <span class="mq-t">SaaS Projects</span>
+      <span class="mq-t">Landing Pages</span>
+      <span class="mq-t">AI Tools</span>
+      <span class="mq-t">Side Projects</span>
+      <span class="mq-t">Get Featured for $5</span>
+      <span class="mq-t">List for Free</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       FEATURED STRIP
+  ══════════════════════════════════════════ -->
+  <section id="featured">
+    <div class="s-lbl">⚡ Promoted</div>
+    <h2 class="s-ttl reveal">FEATURED<br>PROJECTS</h2>
+    <div class="ft-track" id="ft-track">
+      <div class="ft-empty">Loading…</div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       ALL LISTINGS
+  ══════════════════════════════════════════ -->
+  <section id="listings">
+    <div class="s-lbl">Discover</div>
+    <h2 class="s-ttl reveal">ALL <span style="color:var(--neon);">PROJECTS</span></h2>
+    <div class="flt-bar">
+      <button class="fb on" data-f="all">All</button>
+      <button class="fb" data-f="website">Website</button>
+      <button class="fb" data-f="webapp">Web App</button>
+      <button class="fb" data-f="saas">SaaS</button>
+      <button class="fb" data-f="tool">Tool</button>
+      <button class="fb" data-f="other">Other</button>
+      <input class="fsrch" type="text" placeholder="Search projects..." id="srch">
+    </div>
+    <div class="grid" id="grid">
+      <div class="loading-st">
+        <div class="spinner"></div>
+        <div class="loading-txt">Loading projects…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       GET FEATURED / PROMOTE
+  ══════════════════════════════════════════ -->
+  <section id="promote">
+    <div class="promo-box reveal">
+      <div class="promo-hd">
+        <div class="p-ico">⚡</div>
+        <div>
+          <div class="s-lbl" style="margin-bottom:3px;">Get to the Top</div>
+          <div class="p-ttl">FEATURE<br>YOUR PROJECT</div>
+        </div>
+      </div>
+      <p class="p-sub">
+        Pay just <b style="color:var(--gold);">$5 in crypto</b> and your project gets pinned to the top of VibeMarket
+        for <b style="color:var(--white);">7 days</b>. Thousands of builders will discover your work.
+        We verify your payment on-chain before going live.
+      </p>
+
+      <div class="ps-grid">
+        <div class="ps"><div class="ps-n">STEP 01</div><div class="ps-t">Send $5</div><div class="ps-d">Send ~$5 of SOL or ETH to our wallet below.</div></div>
+        <div class="ps"><div class="ps-n">STEP 02</div><div class="ps-t">Copy Tx Hash</div><div class="ps-d">Copy your transaction hash from your wallet.</div></div>
+        <div class="ps"><div class="ps-n">STEP 03</div><div class="ps-t">Submit Below</div><div class="ps-d">Fill in project details and paste the hash.</div></div>
+        <div class="ps"><div class="ps-n">STEP 04</div><div class="ps-t">Go Live</div><div class="ps-d">We verify on-chain and approve within minutes.</div></div>
+      </div>
+
+      <div style="margin-bottom:26px;">
+        <div class="s-lbl" style="margin-bottom:12px;">Send Payment Here</div>
+        <div class="w-box">
+          <span style="font-size:18px;">◎</span>
+          <div>
+            <div class="w-ch">Solana (SOL)</div>
+            <div class="w-a">8az1nNVyotEJu9mfNM2oaEFC9Jt8pCkdvhjuHe9nMbdA</div>
+          </div>
+          <button class="cp-btn" onclick="cp('8az1nNVyotEJu9mfNM2oaEFC9Jt8pCkdvhjuHe9nMbdA',this)">COPY</button>
+        </div>
+        <div class="w-box">
+          <span style="font-size:18px;">⟠</span>
+          <div>
+            <div class="w-ch">EVM — ETH / BNB / Polygon</div>
+            <div class="w-a">0x1420d6f391848a75c0b247d52c210a237b12e686</div>
+          </div>
+          <button class="cp-btn" onclick="cp('0x1420d6f391848a75c0b247d52c210a237b12e686',this)">COPY</button>
+        </div>
+      </div>
+
+      <div class="chain-row">
+        <div class="ch"><span class="dot d-e"></span>Ethereum</div>
+        <div class="ch"><span class="dot d-s"></span>Solana</div>
+        <div class="ch"><span class="dot d-b"></span>BNB Chain</div>
+        <div class="ch" style="color:var(--gold);border-color:rgba(255,215,0,.18);">★ $5 · 7 days top spot</div>
+      </div>
+
+      <div class="f-box">
+        <div class="s-lbl" style="margin-bottom:18px;">Submit Promotion Request</div>
+        <div class="fg">
+          <div class="fgrp">
+            <label class="fl">Project Name</label>
+            <input class="fi" type="text" placeholder="My Awesome Project" id="pn">
+          </div>
+          <div class="fgrp">
+            <label class="fl">Live URL</label>
+            <input class="fi" type="url" placeholder="https://myproject.com" id="pu">
+          </div>
+          <div class="fgrp">
+            <label class="fl">Project Type</label>
+            <select class="fs" id="ptype">
+              <option value="">Select</option>
+              <option>Website</option>
+              <option>Web App</option>
+              <option>SaaS</option>
+              <option>Tool</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fgrp">
+            <label class="fl">Chain Used</label>
+            <select class="fs" id="pchain">
+              <option value="">Select</option>
+              <option>Solana (SOL)</option>
+              <option>Ethereum (ETH)</option>
+              <option>BNB Chain</option>
+              <option>Polygon</option>
+            </select>
+          </div>
+          <div class="fgrp full">
+            <label class="fl">Short Description</label>
+            <textarea class="fta" placeholder="What does your project do?" id="pdesc"></textarea>
+          </div>
+          <div class="fgrp">
+            <label class="fl">Transaction Hash</label>
+            <div class="tx-w"><input class="fi" type="text" placeholder="0x... or Solana signature" id="ptx"></div>
+          </div>
+          <div class="fgrp">
+            <label class="fl">Your Contact (Telegram / Email)</label>
+            <input class="fi" type="text" placeholder="@handle or you@email.com" id="pct">
+          </div>
+        </div>
+        <button class="btn-promo" id="promo-btn" onclick="submitPromo()">⚡ SUBMIT FOR APPROVAL</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SUBMIT YOUR PROJECT (FREE LISTING)
+  ══════════════════════════════════════════ -->
+  <section id="list">
+    <div class="s-lbl">Submit</div>
+    <h2 class="s-ttl reveal">LIST YOUR<br><span style="color:var(--neon);">PROJECT</span></h2>
+    <div class="list-wrap">
+      <p class="reveal" style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:4px;">
+        100% free. Goes live instantly. Share everything about your vibe-coded project with the community.
+        <b style="color:var(--neon);">One submission per person per day.</b>
+      </p>
+      <div class="list-form reveal">
+
+        <!-- Rate limit notice (shown when limit hit) -->
+        <div id="limit-notice" class="limit-notice" style="display:none;"></div>
+
+        <div class="fg">
+          <div class="fgrp">
+            <label class="fl">Project Name *</label>
+            <input class="fi" type="text" placeholder="e.g. NoteFlow" id="ln">
+          </div>
+          <div class="fgrp">
+            <label class="fl">Live URL *</label>
+            <input class="fi" type="url" placeholder="https://myproject.com" id="lurl">
+          </div>
+
+          <div class="fgrp">
+            <label class="fl">Project Type *</label>
+            <select class="fs" id="ltype">
+              <option value="website">Website</option>
+              <option value="webapp">Web App</option>
+              <option value="saas">SaaS</option>
+              <option value="tool">Tool</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="fgrp">
+            <label class="fl">Status</label>
+            <select class="fs" id="lstatus">
+              <option value="live">🟢 Live</option>
+              <option value="beta">🟡 Beta</option>
+              <option value="wip">🔧 Work in Progress</option>
+            </select>
+          </div>
+
+          <div class="fgrp">
+            <label class="fl">Built With (Vibe Tool)</label>
+            <select class="fs" id="lbuilt">
+              <option value="">Select vibe tool…</option>
+              <option>Cursor</option>
+              <option>v0</option>
+              <option>Bolt</option>
+              <option>Lovable</option>
+              <option>Replit</option>
+              <option>Claude</option>
+              <option>ChatGPT</option>
+              <option>Windsurf</option>
+              <option>Other AI Tool</option>
+            </select>
+          </div>
+          <div class="fgrp">
+            <label class="fl">Emoji Icon</label>
+            <input class="fi" type="text" placeholder="🌐" id="lico" maxlength="4">
+          </div>
+
+          <div class="fgrp">
+            <label class="fl">Tech Stack / Tags</label>
+            <input class="fi" type="text" placeholder="React, Tailwind, Supabase, OpenAI" id="ltags">
+          </div>
+          <div class="fgrp">
+            <label class="fl">One-Line Tagline</label>
+            <input class="fi" type="text" placeholder="The best way to take notes with AI" id="ltagline">
+          </div>
+
+          <div class="fgrp full">
+            <label class="fl">Full Description *</label>
+            <textarea class="fta" style="min-height:110px;" id="ldesc"
+              placeholder="Tell everything — what it does, who it's for, what problem it solves, how it works, and what makes it special…"></textarea>
+          </div>
+
+          <div class="fgrp full">
+            <label class="fl">Key Features (one per line)</label>
+            <textarea class="fta" style="min-height:80px;" id="lfeats"
+              placeholder="AI-powered note summarization&#10;Real-time collaboration&#10;Dark mode support&#10;Export to PDF"></textarea>
+          </div>
+
+          <div class="fgrp">
+            <label class="fl">Monthly Revenue (optional)</label>
+            <input class="fi" type="text" placeholder="$0 / $200 / $1.2k…" id="lrev">
+          </div>
+          <div class="fgrp">
+            <label class="fl">Users / Signups (optional)</label>
+            <input class="fi" type="text" placeholder="e.g. 500 users" id="lusers">
+          </div>
+
+          <div class="fgrp full">
+            <label class="fl">Your Contact (Telegram @handle or Email) *</label>
+            <input class="fi" type="text" placeholder="@yourhandle or you@email.com" id="lct">
+          </div>
+        </div>
+
+        <button class="btn-p" style="width:100%;padding:14px;border:none;font-size:13px;letter-spacing:2px;margin-top:4px;cursor:none;"
+          onclick="submitListing()">
+          PUBLISH FOR FREE →
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="f-r">
+    <div class="f-logo">VibeMarket</div>
+    <div class="f-links">
+      <a href="#listings">Browse</a>
+      <a href="#promote">Get Featured</a>
+      <a href="#list">Submit Project</a>
+    </div>
+  </div>
+  <div class="f-b">
+    <div class="f-copy">© 2025 VibeMarket · Discover the best vibe-coded projects</div>
+    <div class="f-tag">BUILT WITH VIBES</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
