@@ -1,6 +1,5 @@
-// ─── ⚙️ CONFIG — FILL THESE IN ────────────────────────────────────────────────
 const SUPABASE_URL = 'https://xjxmicyrizovrwmjztwk.supabase.co';   // e.g. https://abcxyz.supabase.co
-const SUPABASE_KEY = ''eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqeG1pY3lyaXpvdnJ3bWp6dHdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMjE0MDEsImV4cCI6MjA4ODY5NzQwMX0.LkI8GWjmaAOSVINE10fEsyBCItrghTYzj5SVRCYvoHU'';      // long string starting with eyJ...
+const SUPABASE_KEY = '.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqeG1pY3lyaXpvdnJ3bWp6dHdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMjE0MDEsImV4cCI6MjA4ODY5NzQwMX0.LkI8GWjmaAOSVINE10fEsyBCItrghTYzj5SVRCYvoHU'';      // long string starting with eyJ...
 const TG_TOKEN = '8222924269:AAHE-PT37NB0OUtxo80PcEgOOsdqWgjYZoo';
 const TG_CHAT  = '7784672658';
 
