@@ -1,40 +1,4 @@
-/* ═══════════════════════════════════════════
-   VIBEMARKET — app.js
-   ═══════════════════════════════════════════
 
-   DATABASE: Supabase (free, persistent, works everywhere)
-
-   HOW TO SET UP (5 minutes, completely free):
-
-   1. Go to https://supabase.com → "Start for free" → sign up
-
-   2. Click "New project" → name it "vibemarket" → set a password → Create
-
-   3. Wait ~1 min for it to spin up, then go to:
-      Left sidebar → "SQL Editor" → click "New query"
-      Paste this SQL and click RUN:
-
-      ─────────────────────────────────────────
-      create table vm_data (
-        key text primary key,
-        value jsonb not null default '[]'::jsonb
-      );
-      insert into vm_data (key, value) values
-        ('listings', '[]'::jsonb),
-        ('promoted', '[]'::jsonb),
-        ('pending',  '[]'::jsonb);
-
-      alter table vm_data enable row level security;
-      create policy "public read"  on vm_data for select using (true);
-      create policy "public write" on vm_data for all    using (true);
-      ─────────────────────────────────────────
-
-   4. Go to: Project Settings (gear icon) → API
-      Copy "Project URL"  → paste as SUPABASE_URL below
-      Copy "anon public" key → paste as SUPABASE_KEY below
-
-   5. Save the file. Done!
-   ═══════════════════════════════════════════ */
 
 // ─── ⚙️ CONFIG — FILL THESE IN ────────────────────────────────────────────────
 const SUPABASE_URL = 'https://xjxmicyrizovrwmjztwk.supabase.co';   // e.g. https://abcxyz.supabase.co
@@ -559,5 +523,6 @@ async function init() {
   checkLimitNotice();
   startPoll();
 }
+
 
 init();
