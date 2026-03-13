@@ -1,8 +1,6 @@
-
-
 // ─── ⚙️ CONFIG — FILL THESE IN ────────────────────────────────────────────────
 const SUPABASE_URL = 'https://xjxmicyrizovrwmjztwk.supabase.co';   // e.g. https://abcxyz.supabase.co
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqeG1pY3lyaXpvdnJ3bWp6dHdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMjE0MDEsImV4cCI6MjA4ODY5NzQwMX0.LkI8GWjmaAOSVINE10fEsyBCItrghTYzj5SVRCYvoHU';      // long string starting with eyJ...
+const SUPABASE_KEY = ''eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqeG1pY3lyaXpvdnJ3bWp6dHdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMjE0MDEsImV4cCI6MjA4ODY5NzQwMX0.LkI8GWjmaAOSVINE10fEsyBCItrghTYzj5SVRCYvoHU'';      // long string starting with eyJ...
 const TG_TOKEN = '8222924269:AAHE-PT37NB0OUtxo80PcEgOOsdqWgjYZoo';
 const TG_CHAT  = '7784672658';
 
@@ -211,6 +209,12 @@ function statusLabel(s) {
   return s==='beta'?'🟡 Beta':s==='wip'?'🔧 WIP':'🟢 Live';
 }
 
+// ─── SAFE URL — always external, never relative ───────────────────────────────
+function safeUrl(url) {
+  if (!url) return '';
+  return /^https?:\/\//i.test(url) ? url : 'https://' + url;
+}
+
 // ─── RENDER FEATURED ──────────────────────────────────────────────────────────
 function renderFeatured() {
   const track = document.getElementById('ft-track');
@@ -229,7 +233,7 @@ function renderFeatured() {
       <div class="c-name">${item.name}</div>
       <div class="c-desc">${(item.desc||'').substring(0,100)}${(item.desc||'').length>100?'…':''}</div>
       <div class="c-tags">${(item.tags||[]).slice(0,4).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      ${item.url ? `<div class="c-url">${item.url}</div>` : ''}`;
+      ${item.url ? `<div class="c-url" onclick="event.stopPropagation();window.open('${safeUrl(item.url)}','_blank')">${item.url}</div>` : ''}`;
     c.addEventListener('click', () => openDetail(item.id, 'promoted'));
     track.appendChild(c);
   });
@@ -261,7 +265,7 @@ function renderListings(filter = 'all', search = '') {
         <span class="lc-status">${statusLabel(item.status||'live')}</span>
         ${item.built ? `<span class="lc-built">· ${item.built}</span>` : ''}
       </div>
-      ${item.url ? `<div class="lc-url">${item.url}</div>` : ''}
+      ${item.url ? `<div class="lc-url" onclick="event.stopPropagation();window.open('${safeUrl(item.url)}','_blank')">${item.url}</div>` : ''}
       <button class="view-btn" onclick="event.stopPropagation();openDetail('${item.id}','listing');">View Details →</button>`;
     c.addEventListener('click', () => openDetail(item.id, 'listing'));
     grid.appendChild(c);
@@ -339,10 +343,12 @@ function openDetail(id, source) {
   _cc = item.contact || 'Not provided';
   document.getElementById('d-contact').textContent = _cc;
 
-  // Visit button
+  // Visit button — safeUrl ensures https:// prefix so it opens external site
   const vb = document.getElementById('d-visit-btn');
-  if (item.url) { vb.href = item.url; vb.style.display = 'flex'; }
-  else vb.style.display = 'none';
+  if (item.url) {
+    vb.href = safeUrl(item.url);
+    vb.style.display = 'flex';
+  } else vb.style.display = 'none';
 
   document.getElementById('ov').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -523,6 +529,5 @@ async function init() {
   checkLimitNotice();
   startPoll();
 }
-
 
 init();
